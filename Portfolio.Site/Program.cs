@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Portfolio.Site.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
