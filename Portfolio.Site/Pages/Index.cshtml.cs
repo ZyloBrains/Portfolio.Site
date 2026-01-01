@@ -13,6 +13,6 @@ public class IndexModel(ApplicationDbContext _db) : PageModel
 
     public async Task OnGet()
     {
-        Widgets = await db.Widgets.ToListAsync();
+        //Widgets = await db.Widgets.ToListAsync();
     }
 }
