@@ -1,0 +1,38 @@
+[
+  {
+    "outputFileName": "wwwroot/css/zylo-uikit.min.css",
+    "inputFiles": [
+      "wwwroot/css/zylo-uikit.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/tiny-slider.min.css",
+    "inputFiles": [
+      "wwwroot/css/tiny-slider.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/bundle.css",
+    "inputFiles": [
+      "wwwroot/css/animate.css",
+      "wwwroot/css/glightbox.min.css",
+      "wwwroot/css/LineIcons.2.0.css",
+      "wwwroot/css/tiny-slider.css",
+      "wwwroot/css/zylo-uikit.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/all.js",
+    "inputFiles": [
+      "wwwroot/js/wow.min.js",
+      "wwwroot/js/tiny-slider.js",
+      "wwwroot/js/main.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/all.min.css",
+    "inputFiles": [
+      "wwwroot/css/all.css"
+    ]
+  }
+]
