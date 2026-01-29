@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Site.Data;
@@ -9,10 +8,15 @@ public class IndexModel(ApplicationDbContext _db) : PageModel
 {
     readonly ApplicationDbContext db = _db;
 
-    public List<Widget> Widgets { get; set; } = [];
+    public List<Section> SiteSections { get; set; } = [];
 
     public async Task OnGet()
     {
-        //Widgets = await db.Widgets.ToListAsync();
+        var site = await db.Sites.Where(x => x.Name == "ZyloBrains")
+                            .Include(y => y.Sections)
+                            .ThenInclude(z => z.Widgets)
+                            .FirstOrDefaultAsync();
+
+        SiteSections = site?.Sections ?? [];
     }
 }
