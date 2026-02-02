@@ -1,0 +1,12 @@
+﻿namespace Portfolio.Site.Data;
+public class Site: BaseEntity
+{
+    public Site() => Id = Guid.NewGuid().ToString();
+    public string Id { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string? Domain { get; set; }
+    public string? Client { get; set; }
+    public string? Content { get; set; }
+
+    public List<Section>? Sections { get; set; }
+}
