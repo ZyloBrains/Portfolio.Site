@@ -12,11 +12,10 @@ public class IndexModel(ApplicationDbContext _db) : PageModel
 
     public async Task OnGet()
     {
-        var site = await db.Sites.Where(x => x.Name == "ZyloBrains")
-                            .Include(y => y.Sections)
-                            .ThenInclude(z => z.Widgets)
-                            .FirstOrDefaultAsync();
-
-        SiteSections = site?.Sections ?? [];
+        SiteSections = await db.Sections
+            .Where(x => x.Site != null && x.Site.Name == "ZyloBrains" && x.Enabled)
+            .OrderBy(s => s.Order)
+            .Include(z => z.Widgets)
+            .ToListAsync() ?? [];
     }
 }
