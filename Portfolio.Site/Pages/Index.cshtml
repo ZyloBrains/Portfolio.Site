@@ -20,9 +20,9 @@
     //    RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
     // build widgets HTML by decoding each widget
-    var widgetsHtml = section?.Widgets == null
+    var widgetsHtml = section?.SectionItems == null
         ? string.Empty
-        : string.Concat(section.Widgets.Select(w => WebUtility.HtmlDecode(w?.HtmlContent ?? string.Empty)));
+        : string.Concat(section.SectionItems.Select(w => WebUtility.HtmlDecode(w?.Content ?? string.Empty)));
 
     // placeholder token that should exist in the saved section HTML where widgets must be injected
     const string Placeholder = "{{widgets}}";
@@ -34,8 +34,8 @@
         : decodedSection + widgetsHtml;
 
     // if contains extra p tags due to editor, remove them
-    outputHtml = outputHtml.Replace("<p>", string.Empty);
-    outputHtml = outputHtml.Replace("</p>", string.Empty);
+    // outputHtml = outputHtml.Replace("<p>", string.Empty);
+    // outputHtml = outputHtml.Replace("</p>", string.Empty);
 
     @Html.Raw(outputHtml)
 }

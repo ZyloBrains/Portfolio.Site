@@ -1,4 +1,5 @@
-﻿@inject Portfolio.Site.Data.ApplicationDbContext _db
+﻿@using Portfolio.Site.Data
+@inject Portfolio.Site.Data.ApplicationDbContext _db
 
 <header class="header header-6">
     <div class="navbar-area">
@@ -17,36 +18,23 @@
 
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent6">
                             @{
-                                // load enabled sections from the database and order them
                                 var sections = _db.Sections
-                                    .Where(s => s.Enabled)
-                                    .OrderBy(s => s.Order)
-                                    .Select (s => new
-                                    {
-                                        s.Id,
-                                        s.Title
-                                    })
-                                    .ToList();
-
-                                // simple slug generator for anchor targets
-                                string Slug(string title, int id)
+                                .Where(s => s.Site.Name == Constants.SiteName) // Assuming you want sections for SiteId = 1, adjust as needed
+                                .Where(s => s.Enabled)
+                                .OrderBy(s => s.Order)
+                                .Select(s => new
                                 {
-                                    if (string.IsNullOrWhiteSpace(title)) return $"section-{id}";
-                                    var s = System.Text.RegularExpressions.Regex.Replace(title.ToLowerInvariant(), @"[^a-z0-9\s-]", "");
-                                    s = System.Text.RegularExpressions.Regex.Replace(s, @"\s+", "-").Trim('-');
-                                    return string.IsNullOrEmpty(s) ? $"section-{id}" : s;
-                                }
+                                    s.Title,
+                                    s.Slug
+                                })
+                                .ToArray();
                             }
 
-                            <ul id="nav6" class="navbar-nav ms-auto">
-                                <li class="nav-item">
-                                    <a class="page-scroll active" href="#home">Home</a>
-                                </li>
-
-                                @foreach (var sec in sections)
+                            <ul id="nav6" class="navbar-nav ms-auto">                                
+                                @for (int i = 0; i < sections.Length; i++)
                                 {
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="#@Slug(sec.Title, sec.Id)">@sec.Title</a>
+                                        <a class="page-scroll @(i == 0 ? "active" : "")" href="#@sections[i].Slug">@sections[i].Title</a>
                                     </li>
                                 }
                             </ul>
