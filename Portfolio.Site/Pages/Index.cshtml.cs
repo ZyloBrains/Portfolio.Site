@@ -13,9 +13,9 @@ public class IndexModel(ApplicationDbContext _db) : PageModel
     public async Task OnGet()
     {
         SiteSections = await db.Sections
-            .Where(x => x.Site != null && x.Site.Name == "ZyloBrains" && x.Enabled)
+            .Where(x => x.Site != null && x.Site.Name == Constants.SiteName && x.Enabled)
             .OrderBy(s => s.Order)
-            .Include(z => z.Widgets)
+            .Include(z => z.SectionItems.OrderBy(w => w.Order))
             .ToListAsync() ?? [];
     }
 }
