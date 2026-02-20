@@ -19,7 +19,7 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent6">
                             @{
                                 var sections = _db.Sections
-                                .Where(s => s.Site.Name == Constants.SiteName) // Assuming you want sections for SiteId = 1, adjust as needed
+                                .Where(s => s.Site.Name == Constants.SiteName)
                                 .Where(s => s.Enabled)
                                 .OrderBy(s => s.Order)
                                 .Select(s => new
