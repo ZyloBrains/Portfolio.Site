@@ -14,15 +14,15 @@
     var decodedSection = WebUtility.HtmlDecode(section?.Content ?? string.Empty);
 
     //decodedSection = Regex.Replace(
-    //    decodedSection,
-    //    @"<span\b[^>]*\bstyle\s*=\s*(?:[""'][^""']*(?:\bcolor\b|\bbackground\b)[^""']*[""']|[^>]*\bcolor\b[^>]*|[^>]*\bbackground\b[^>]*)[^>]*>(.*?)</span>",
-    //    "$1",
-    //    RegexOptions.IgnoreCase | RegexOptions.Singleline);
+    // decodedSection,
+    //@"<span\b[^>]*\bstyle\s*=\s*(?:[""'][^""']*(?:\bcolor\b|\bbackground\b)[^""']*[""']|[^>]*\bcolor\b[^>]*|[^>]*\bbackground\b[^>]*)[^>]*>(.*?)</span>",
+// "$1",
+// RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
-    // build widgets HTML by decoding each widget
-    var widgetsHtml = section?.SectionItems == null
-        ? string.Empty
-        : string.Concat(section.SectionItems.Select(w => WebUtility.HtmlDecode(w?.Content ?? string.Empty)));
+// build widgets HTML by decoding each widget
+var widgetsHtml = section?.SectionItems == null
+? string.Empty
+: string.Concat(section.SectionItems.Select(w => WebUtility.HtmlDecode(w?.Content ?? string.Empty)));
 
     // placeholder token that should exist in the saved section HTML where widgets must be injected
     const string Placeholder = "{{widgets}}";
@@ -30,8 +30,8 @@
     // if the placeholder exists, replace it with the combined widgets HTML;
     // otherwise append widgetsHtml after the section HTML as a fallback
     var outputHtml = decodedSection.Contains(Placeholder)
-        ? decodedSection.Replace(Placeholder, widgetsHtml)
-        : decodedSection + widgetsHtml;
+    ? decodedSection.Replace(Placeholder, widgetsHtml)
+    : decodedSection + widgetsHtml;
 
     // if contains extra p tags due to editor, remove them
     // outputHtml = outputHtml.Replace("<p>", string.Empty);
