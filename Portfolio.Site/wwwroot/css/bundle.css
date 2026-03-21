@@ -6148,6 +6148,7 @@ p {
   .feature-style-5 .single-feature:hover {
     border-color: #ff8c69;
     box-shadow: 0px 8px 25px rgba(255, 140, 105, 0.35);
+    transform: scale(1.10);
   }
 
   .feature-style-5 .single-feature .icon {
@@ -7732,4 +7733,15 @@ input:focus, textarea:focus, button:focus {
 
 .pr-100 {
   padding-right: 100px;
+}
+
+#ts-upskilling .card {
+  transition: box-shadow 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#ts-upskilling .card:hover {
+  box-shadow: 0 4px 8px rgba(255, 140, 105, 0.5);
+  transform: scale(1.15);
+  z-index: 10;
 }
